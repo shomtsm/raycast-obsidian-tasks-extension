@@ -9,6 +9,27 @@ import {
 import { Preferences, Priority, Task } from "../types";
 import { priorityToValue } from "../utils/priority";
 
+const sortTasks = (tasks: Task[], preferences: Preferences): Task[] => {
+  const { sortByDueDate, sortByPriority } = preferences;
+  if (!sortByDueDate && !sortByPriority) return tasks;
+
+  const dueTime = (t: Task) => (t.dueDate ? t.dueDate.getTime() : Number.POSITIVE_INFINITY);
+
+  return [...tasks].sort((a, b) => {
+    if (sortByDueDate) {
+      const at = dueTime(a);
+      const bt = dueTime(b);
+      if (at !== bt) return at - bt;
+    }
+    if (sortByPriority) {
+      const ap = priorityToValue(a.priority);
+      const bp = priorityToValue(b.priority);
+      if (ap !== bp) return ap - bp;
+    }
+    return 0;
+  });
+};
+
 export const useTasks = (preferences: Preferences) => {
   const [allTasks, setAllTasks] = useState<Task[]>([]);
   const [topTask, setTopTask] = useState<Task | null>(null);
@@ -20,18 +41,7 @@ export const useTasks = (preferences: Preferences) => {
       const highestPriorityTask = await getHighestPriorityTask();
       setTopTask(highestPriorityTask);
       const tasks = await getAllUncompletedTasks();
-
-      if (preferences.sortByPriority) {
-        tasks.sort((a, b) => {
-          const priorityA = a.priority || Priority.LOWEST;
-          const priorityB = b.priority || Priority.LOWEST;
-
-          if (!b.priority) return -1;
-          return priorityToValue(priorityA) - priorityToValue(priorityB);
-        });
-      }
-
-      setAllTasks(tasks);
+      setAllTasks(sortTasks(tasks, preferences));
     } catch (error) {
       console.error("Error fetching tasks:", error);
       setTopTask(null);
@@ -42,7 +52,7 @@ export const useTasks = (preferences: Preferences) => {
   };
 
   const refreshTaskList = async () => {
-    setAllTasks(await getAllUncompletedTasks());
+    setAllTasks(sortTasks(await getAllUncompletedTasks(), preferences));
     setTopTask(await getHighestPriorityTask());
   };
 

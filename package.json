@@ -94,6 +94,15 @@
       "label": "Sort by priority"
     },
     {
+      "name": "sortByDueDate",
+      "title": "Sort by Due Date",
+      "description": "Sort tasks by due date (ascending). Tasks without a due date are placed at the end. When combined with Sort by Priority, due date takes precedence and priority is used as a tiebreaker.",
+      "type": "checkbox",
+      "default": false,
+      "required": false,
+      "label": "Sort by due date"
+    },
+    {
       "name": "maxMenubarDescriptionLength",
       "title": "Max Description Length",
       "description": "Maximum length of task description to show in menubar",
