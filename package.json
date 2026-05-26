@@ -94,6 +94,15 @@
       "label": "Sort by priority"
     },
     {
+      "name": "showDetail",
+      "title": "Show Detail Pane",
+      "description": "Show the detail pane on the right side of List Tasks. Can be toggled at runtime with Cmd+Shift+D.",
+      "type": "checkbox",
+      "default": true,
+      "required": false,
+      "label": "Show detail pane"
+    },
+    {
       "name": "maxMenubarDescriptionLength",
       "title": "Max Description Length",
       "description": "Maximum length of task description to show in menubar",

@@ -8,6 +8,7 @@ interface TaskItemProps {
   onMarkDone?: (task: Task) => void;
   onDelete?: (task: Task) => void;
   onEdit?: (task: Task) => void;
+  onToggleDetail?: () => void;
   showActions?: boolean;
 }
 
@@ -16,6 +17,7 @@ export function TaskItem({
   onMarkDone,
   onDelete,
   onEdit,
+  onToggleDetail,
   showActions = true,
 }: TaskItemProps) {
   const taskDesc = getFormattedDescription(task);
@@ -168,6 +170,14 @@ export function TaskItem({
                 content={task.description}
                 shortcut={{ modifiers: ["cmd"], key: "c" }}
               />
+              {onToggleDetail && (
+                <Action
+                  title="Toggle Detail Pane"
+                  icon={Icon.AppWindowSidebarRight}
+                  shortcut={{ modifiers: ["cmd", "shift"], key: "d" }}
+                  onAction={onToggleDetail}
+                />
+              )}
             </ActionPanel.Section>
           </ActionPanel>
         ) : undefined

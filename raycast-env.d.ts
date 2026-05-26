@@ -18,6 +18,8 @@ type ExtensionPreferences = {
   "showIcon": boolean,
   /** Sort by Priority - Sort tasks by priority */
   "sortByPriority": boolean,
+  /** Show Detail Pane - Show the detail pane on the right side of List Tasks. Can be toggled at runtime with Cmd+Shift+D. */
+  "showDetail": boolean,
   /** Max Description Length - Maximum length of task description to show in menubar */
   "maxMenubarDescriptionLength": string,
   /** Refresh Interval - Refresh interval in minutes */

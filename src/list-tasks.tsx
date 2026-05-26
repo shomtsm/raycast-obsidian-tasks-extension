@@ -12,6 +12,7 @@ export default function Command() {
   const [searchText, setSearchText] = useState("");
   const { push } = useNavigation();
   const preferences = getPreferenceValues<Preferences>();
+  const [showDetail, setShowDetail] = useState<boolean>(preferences.showDetail);
 
   const { allTasks, isLoading, refreshTaskList, handleMarkDone, handleDeleteTask } =
     useTasks(preferences);
@@ -40,7 +41,7 @@ export default function Command() {
       searchBarPlaceholder="Search tasks..."
       onSearchTextChange={setSearchText}
       filtering={false}
-      isShowingDetail
+      isShowingDetail={showDetail}
     >
       <List.Section title="Tasks" subtitle={filteredTasks.length.toString()}>
         {filteredTasks.map((task) => (
@@ -50,6 +51,7 @@ export default function Command() {
             onMarkDone={handleMarkDone}
             onDelete={handleDeleteTask}
             onEdit={handleEditTask}
+            onToggleDetail={() => setShowDetail((s) => !s)}
           />
         ))}
       </List.Section>
