@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Form, ActionPanel, Action, showToast, Toast } from "@raycast/api";
+import { Form, ActionPanel, Action, showToast, Toast, closeMainWindow } from "@raycast/api";
 import { Priority } from "./types";
 import { addTask } from "./utils/taskOperations";
 import { ICONS } from "./constants";
@@ -8,7 +8,8 @@ export default function Command() {
   const [description, setDescription] = useState("");
   const [dueDate, setDueDate] = useState<Date | null>(null);
   const [scheduledDate, setScheduledDate] = useState<Date | null>(null);
-  const [startDate, setStartDate] = useState<Date | null>(null);
+  // Default the start date to today so a newly created task records its creation date as the start date.
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [priority, setPriority] = useState<Priority | "">("");
   const [tags, setTags] = useState("");
   const [recurrence, setRecurrence] = useState("");
@@ -48,10 +49,13 @@ export default function Command() {
       setDescription("");
       setDueDate(null);
       setScheduledDate(null);
-      setStartDate(null);
+      setStartDate(new Date());
       setPriority("");
       setTags("");
       setRecurrence("");
+
+      // Close the Raycast window after the task is added.
+      await closeMainWindow();
     } catch (error) {
       console.error("Error adding task:", error);
       await showToast({

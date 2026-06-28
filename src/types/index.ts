@@ -4,7 +4,9 @@ export interface Preferences {
   maxMenubarDescriptionLength: string;
   menubarTaskCount: boolean;
   showIcon: boolean;
+  sortByDueDate: boolean;
   sortByPriority: boolean;
+  sortByRecentlyAdded: boolean;
   showDetail: boolean;
   showCompletedDate: boolean;
   refreshIntervalInMinutes: string;

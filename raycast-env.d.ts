@@ -16,8 +16,12 @@ type ExtensionPreferences = {
   "menubarTaskCount": boolean,
   /** Show Icon in Menubar - Show the icon of tasks in the menubar */
   "showIcon": boolean,
+  /** Sort by Due Date - Sort tasks by due date (ascending). Tasks without a due date are placed at the end. When combined with Sort by Priority, due date takes precedence and priority is used as a tiebreaker. */
+  "sortByDueDate": boolean,
   /** Sort by Priority - Sort tasks by priority */
   "sortByPriority": boolean,
+  /** Sort by Recently Added - Sort tasks by added order, showing the most recently added task (the bottom of the file) first. Used as the final tiebreaker after Due Date and Priority. */
+  "sortByRecentlyAdded": boolean,
   /** Show Detail Pane - Show the detail pane on the right side of List Tasks. Can be toggled at runtime with Cmd+Shift+D. */
   "showDetail": boolean,
   /** Max Description Length - Maximum length of task description to show in menubar */

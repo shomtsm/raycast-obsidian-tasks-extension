@@ -85,6 +85,15 @@
       "label": "Show icon"
     },
     {
+      "name": "sortByDueDate",
+      "title": "Sort by Due Date",
+      "description": "Sort tasks by due date (ascending). Tasks without a due date are placed at the end. When combined with Sort by Priority, due date takes precedence and priority is used as a tiebreaker.",
+      "type": "checkbox",
+      "default": false,
+      "required": false,
+      "label": "Sort by due date"
+    },
+    {
       "name": "sortByPriority",
       "title": "Sort by Priority",
       "description": "Sort tasks by priority",
@@ -92,6 +101,15 @@
       "default": false,
       "required": false,
       "label": "Sort by priority"
+    },
+    {
+      "name": "sortByRecentlyAdded",
+      "title": "Sort by Recently Added",
+      "description": "Sort tasks by added order, showing the most recently added task (the bottom of the file) first. Used as the final tiebreaker after Due Date and Priority.",
+      "type": "checkbox",
+      "default": false,
+      "required": false,
+      "label": "Sort by recently added"
     },
     {
       "name": "showDetail",

@@ -80,19 +80,20 @@ export const addTask = async (
     const taskFile = await readTasksFile();
     const lines = taskFile.content.split("\n");
 
-    // Create a new task with missing fields
+    // Create a new task with missing fields. New tasks are inserted at the top
+    // of the file so the most recently added task appears first.
     const newTask: Task = {
       ...task,
-      id: String(lines.length),
+      id: "0",
       createdAt: new Date(),
-      line: lines.length,
+      line: 0,
       filePath: taskFile.path,
       indentation: "", // Default indentation
     };
 
     const taskText = formatTask(newTask);
 
-    lines.push(taskText);
+    lines.unshift(taskText);
 
     await fs.writeFile(taskFile.path, lines.join("\n"), "utf-8");
 
